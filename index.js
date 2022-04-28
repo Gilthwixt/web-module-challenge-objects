@@ -15,11 +15,30 @@ The function should:
   Example createMenuItem('tacos', 8, 'Lunch') should return {name: 'tacos', price: 8, category: 'Lunch'}
 */
 
+//Old working version
+// function createMenuItem(myName, myPrice, myCategory){
+//   const newMenuItem = {
+//     name: `${myName}`,
+//     price: myPrice,
+//     category: myCategory,
+//   };
+//   console.log('An item has been added to the menu...')
+//   console.log(Object.keys(newMenuItem))
+//   console.log(Object.values(newMenuItem))
+//   return(newMenuItem)
+// }
 
-function createMenuItem(/*Your code here*/){
-  /*Your code here*/
+function createMenuItem(newName, newPrice, newCategory){
+  function MenuItem(myName, myPrice, myCategory){  
+  this.name = myName;
+  this.price = myPrice;
+  this.category = myCategory;
+  }
+  const newMenuItem = new MenuItem(newName, newPrice, newCategory);
+  console.log("A new menu item has been added...\n")
+  console.log(newMenuItem, '\n')
+  return(newMenuItem)
 }
-
 
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 1b (not auto-tested): 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
@@ -32,7 +51,9 @@ Test your createMenuItems function by doing the following:
   For example: createMenuItem("pizza",5,"lunch") would return this as the object: {name:"Pizza",price:5,category:"lunch"}
 */
 
-
+createMenuItem("sushi", 10, "dinner")
+createMenuItem("pasta", 7, "dinner")
+createMenuItem("panini", 6, "lunch")
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 2: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 You're having a lunch special! 25% off for teachers and students, 10% off for everyone else. Add a method to the burger object below that automatically calculates price depending on the string received as a parameter. 
@@ -54,6 +75,13 @@ const burger = {
   
 }
 
+burger.discount = function (id){
+  if (id === 'teacher' || id === 'student'){
+    return(this.price * 0.75)
+  } 
+
+  return(this.price * 0.90)
+}
 
 
 ///////////////Reviews (MVP)///////////////////
@@ -73,7 +101,7 @@ Using the reviews array above:
   1. log only Julius' feedback to the console - no function needed 
 */
 
-
+console.log(reviews[5]['feedback'], '\n')
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 4 (not auto-tested): 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 Reyna's feedback is missing! Use what you know to do the following: (no function needed) 
@@ -81,7 +109,9 @@ Reyna's feedback is missing! Use what you know to do the following: (no function
   2. log the reviews array to the console to check your work
 */
 
+reviews[reviews.length - 1]['feedback'] = "this place is chill with really cool people, great for getting work done on weekdays"
 
+console.log(reviews[reviews.length - 1], '\n')
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 5: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Write a function that creates an object with name, rating, feedback, add the new review to the end of an array and returns the resulting array
@@ -93,11 +123,16 @@ Write a function that creates an object with name, rating, feedback, add the new
 */
 
 
-function addReview(/*Your Code Here */){
-  /*Your Code Here */
+function addReview(targetArray, revName, revRating, revFeedback){
+  const newReview = {
+    name: revName,
+    rating: revRating,
+    feedback: revFeedback,
+  };
+  targetArray.push(newReview)
+  console.log('A new review has been added...\n')
+  return(targetArray)
 }
-
-
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀
 Write a function to return a review based on the index of the review in the array.
@@ -110,12 +145,10 @@ Use the getReviewByIndex function below to do the following:
 */
 
 
-function getReviewByIndex(/*Your code here*/) {
-  /*Your code here*/
+function getReviewByIndex(targetArray, targetIndex) {
+  const {name, rating, feedback} = (targetArray[targetIndex])
+  return(`${name} gave the restaurant a ${rating} star review, and their feedback was: ${feedback}`)
 }
-
-  
-
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 7: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 Write a function to get information about the most recent (last) review called `getLastReview`
 
@@ -129,8 +162,11 @@ Use the getLastReview function below to do the following:
 */
 
 
-function getLastReview(/*Your code here*/) {
-  /*Your code here*/
+function getLastReview(targetArray) {
+  const name = (targetArray[targetArray.length - 1]['name'])
+  const rating = (targetArray[targetArray.length - 1]['rating']) 
+  const feedback = (targetArray[targetArray.length - 1]['feedback'])
+  return(`${name} gave the restaurant a ${rating} star review, and their feedback was: ${feedback}`)
 } 
 
 
